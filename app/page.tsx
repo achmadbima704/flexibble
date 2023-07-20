@@ -4,6 +4,15 @@ import LoadMore from "@/components/LoadMore";
 import ProjectCard from "@/components/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions"
 
+type SearchParams = {
+  category?: string;
+  endcursor?: string;
+}
+
+type Props = {
+  searchParams: SearchParams
+}
+
 type ProjectSearch = {
   projectSearch: {
     edges: { node: ProjectInterface }[];
@@ -14,15 +23,6 @@ type ProjectSearch = {
       endCursor: string;
     }
   }
-}
-
-type SearchParams = {
-  category?: string;
-  endcursor?: string;
-}
-
-type Props = {
-  searchParams: SearchParams
 }
 
 export const dynamic = 'force-dynamic';
