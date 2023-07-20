@@ -10,7 +10,8 @@ const User = g.model('User', {
   linkedInUrl: g.url().optional(),
   projects: g.relation(() => Project).list().optional(),
 }).auth((rules) => {
-  rules.public().read()
+  rules.public().read().create()
+  rules.private().delete().update()
 })
 
 // @ts-ignore

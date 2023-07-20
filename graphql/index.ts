@@ -1,5 +1,7 @@
+import {gql} from "graphql-request";
+
 export const getUserQuery = `
-    query GetUser($email: String!) {
+    query User($email: String!) {
         user(by: {email: $email}) {
             id
             name
@@ -13,7 +15,7 @@ export const getUserQuery = `
 `
 
 export const createUserMutation = `
-    mutation CreateUser($input: UserCreateInput!) {
+    mutation UserCreate($input: UserCreateInput!) {
         userCreate(input: $input) {
             user {
                 id
