@@ -1,5 +1,5 @@
 import { ProjectForm } from "@/common.types";
-import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, updateProjectMutation } from "@/graphql";
+import { createProjectMutation, createUserMutation, deleteProjectMutation, getProjectByIdQuery, getProjectsOfUserQuery, getUserQuery, projectsQuery, projectsQueryAll, projectsQueryWithFilter, updateProjectMutation } from "@/graphql";
 import { GraphQLClient } from "graphql-request";
 
 const isProduction = process.env.NODE_ENV === 'production'
@@ -84,7 +84,11 @@ export const createNewProject = async (
 export const fetchAllProjects = async (category?: string | null, endCursor?: string | null) => {
   client.setHeader('x-api-key', apiKey);
 
-  return makeGraphQLRequest(projectsQuery, { category, endCursor });
+  if (category !== null) {
+    return makeGraphQLRequest(projectsQuery, { category, endCursor })
+  }
+
+  return makeGraphQLRequest(projectsQuery, { category });
 }
 
 export const getProjectDetails = (id: string) => {

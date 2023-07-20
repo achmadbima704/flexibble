@@ -74,6 +74,32 @@ export const projectsQuery = `
   }
 `;
 
+export const projectsQueryWithFilter = `
+  query getProjects($category: String, $endcursor: String) {
+    projectSearch(first: 8, after: $endcursor, filter: {category: {eq: $category}}) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+`;
+
+export const projectsQueryAll = `
+  query getProjects( $endcursor: String) {
+    projectSearch(first: 8, after: $endcursor) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        startCursor
+        endCursor
+      }
+    }
+  }
+  `;
+
 export const getProjectByIdQuery = `
   query GetProjectById($id: ID!) {
     project(by: { id: $id }) {
