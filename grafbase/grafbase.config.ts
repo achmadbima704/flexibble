@@ -10,8 +10,7 @@ const User = g.model('User', {
   linkedInUrl: g.url().optional(),
   projects: g.relation(() => Project).list().optional(),
 }).auth((rules) => {
-  rules.public().read().create()
-  rules.private().delete().update()
+  rules.public().read()
 })
 
 // @ts-ignore
@@ -37,6 +36,6 @@ export default config({
   schema: g,
   auth: {
     providers: [jwt],
-    rules: (rules) => rules.private(),
+    rules: rules => rules.private(),
   }
 })
